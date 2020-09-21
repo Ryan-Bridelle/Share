@@ -1,0 +1,41 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}
+	{{parent()}}
+	Liste Themes
+{% endblock %}
+
+{% block body %}
+	{{parent()}}
+	<div class="container">
+		<div class="row justify-content-center">
+			<h1 class="text-center text-primary p-4">Liste Themes</h1>
+		</div>
+
+		<div class="row justify-content-center">
+			<table class="table table-hover">
+				<thead>
+					<tr class="table-dark">
+
+						<th scope="row">libelle</th>
+
+					</tr>
+          </thead>
+          <tbody>
+
+
+					{% for theme in themes %}
+						<tr class="{{ cycle(['table-primary', 'table-secondary'],loop.index0)}}">
+
+							<td>
+								{{theme.libelle}}
+              </td>
+						</tr>
+					{% endfor %}
+
+				</tbody>
+			</table>
+
+
+		</div>
+	{% endblock %}
