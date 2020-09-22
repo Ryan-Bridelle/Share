@@ -17,19 +17,27 @@
 				<thead>
 					<tr class="table-dark">
 
-						<th scope="row">libelle</th>
+						<th scope="row">Nom</th>
+						<td>Prenom</td>
+						<td>Date Naissance</td>
+						<td>Date Inscription</td>
 
 					</tr>
           </thead>
           <tbody>
 
 
-					{% for theme in themes %}
+					{% for utilisateur in utilisateurs %}
 						<tr class="{{ cycle(['table-primary', 'table-secondary'],loop.index0)}}">
 
-							<td>
-								{{theme.libelle}}
-              </td>
+							
+							<td> {{utilisateur.nom}} </td>
+							<td> {{utilisateur.prenom}} </td>
+							<td> {{utilisateur.datenaissance | date("d-m-Y")}} </td>
+							<td> {{utilisateur.dateinscription | date("d-m-Y")}} </td>
+
+
+              
 						</tr>
 					{% endfor %}
 
