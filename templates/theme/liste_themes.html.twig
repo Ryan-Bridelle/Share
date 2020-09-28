@@ -18,7 +18,7 @@
 					<tr class="table-dark">
 
 						<th scope="row">libelle</th>
-
+						<th></th>
 					</tr>
           </thead>
           <tbody>
@@ -28,8 +28,7 @@
 						<tr class="{{ cycle(['table-primary', 'table-secondary'],loop.index0)}}">
 
 							<td>
-								{{theme.libelle}}
-              </td>
+								{{theme.libelle | capitalize}}</td><td><a href="" class "text-white"><span class="material-icons">create</span>
 						</tr>
 					{% endfor %}
 
