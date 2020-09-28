@@ -8,11 +8,57 @@ use App\Entity\Utilisateur;
 use App\Form\AjouterUtilisateurType;
 use App\Repository\UtilisateurRepository;
 use Symfony\Component\HttpFoundation\Request;
+use App\Form\ModifUtilisateurType;
 
 
 
 class UtilisateurController extends AbstractController
 {
+
+
+
+
+    /**
+     * @Route("/modif_utilisateur/{id}", name="modif_utilisateur", requirements={"id"="\d+"})
+     */
+    public function modifUtilisateur(int $id,Request $request)
+    {
+
+        $em = $this->getDoctrine();
+        $repoUtilisateur = $em->getRepository(Utilisateur::class);
+        $utilisateur = $repoUtilisateur->find($id);
+            if($utilisateur == null){
+                $this->addFlash('notice',"Ce thème n'exsite pas");
+                return $this->redirectToRoute('liste_utilisateurs');
+            }
+
+        $form = $this->createForm(modifUtilisateurType::class,$utilisateur);
+        if ($request->isMethod('POST')) {
+            $form->handleRequest($request);
+            if ($form->isSubmitted() && $form->isValid()) {
+
+                $em = $this->getDoctrine()->getManager();              
+                $em->persist($utilisateur);              
+                $em->flush();
+                
+                if ($request->isMethod('POST')) {  
+           
+                    if ($form->isSubmitted() && $form->isValid()) {
+                         $this->addFlash('notice','utilisateur modifié');
+                    }
+                    return $this->redirectToRoute('liste_utilisateurs');
+                }
+            }
+        }
+        return $this->render('utilisateur/modif_utilisateur.html.twig', [
+
+            'form'=>$form->createView()
+        ]);
+
+        }
+ 
+
+
     /**
      * @Route("/ajout_utilisateur", name="ajout_utilisateur")
      */

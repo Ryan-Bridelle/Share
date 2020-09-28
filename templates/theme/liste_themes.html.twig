@@ -28,7 +28,8 @@
 						<tr class="{{ cycle(['table-primary', 'table-secondary'],loop.index0)}}">
 
 							<td>
-								{{theme.libelle | capitalize}}</td><td><a href="" class "text-white"><span class="material-icons">create</span>
+								{{theme.libelle | capitalize}}</td><td><a href="{{path("modif_theme",{'id':theme.id})}}" class="text-dark"><span class="material-icons">create</span></a></td>
+								<td><a href="{{path('liste_themes',{'supp':theme.id})}}" class="text-white"><span class="material-icons" title="Supprimer le thème">delete</span></a></td>
 						</tr>
 					{% endfor %}
 

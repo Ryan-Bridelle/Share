@@ -35,6 +35,7 @@
 							<td> {{utilisateur.prenom}} </td>
 							<td> {{utilisateur.datenaissance | date("d-m-Y")}} </td>
 							<td> {{utilisateur.dateinscription | date("d-m-Y")}} </td>
+							<td><a href="{{path("modif_utilisateur",{'id':utilisateur.id})}}" class="text-dark"><span class="material-icons">create</span></td>
 
 
               
