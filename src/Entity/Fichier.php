@@ -66,12 +66,12 @@ class Fichier
         return $this->id;
     }
 
-    public function getNom(): ?string
+    public function getNom()
     {
         return $this->nom;
     }
 
-    public function setNom(string $nom): self
+    public function setNom($nom)
     {
         $this->nom = $nom;
 
