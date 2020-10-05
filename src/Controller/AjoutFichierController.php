@@ -6,8 +6,8 @@ use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Component\HttpFoundation\Request;
 use App\Entity\Fichier;
-
 use App\Form\AjoutFichierType;
+use Symfony\Component\HttpFoundation\File\File;
 
 
 
@@ -68,10 +68,19 @@ class AjoutFichierController extends AbstractController
     /**
      * @Route("/liste_fichiers", name="liste_fichiers")
      */
-    public function ListeFichiers()
+    public function ListeFichiers(Request $request)
     {
         $em = $this->getDoctrine();
         $repoFichier = $em->getRepository(Fichier::class);
+
+        if ($request->get('supp')!=null){
+            $fichier = $repoFichier->find($request->get('supp'));
+            if($fichier!=null){
+                $em->getManager()->remove($fichier);
+                $em->getManager()->flush();
+            }    
+            return $this->redirectToRoute('liste_fichiers');
+        }
 
         $fichiers = $repoFichier->findBy(array(),array('vraiNom'=>'ASC'));
         
@@ -94,7 +103,8 @@ class AjoutFichierController extends AbstractController
             $this->redirectToRoute('liste_fichiers');
         }
         else{
-            return $this->file($this->getParameter('file_directory').'/'.$fichier->getNom());
+            $rFichier = new file($this->getParameter('file_directory').'/'.$fichier->getNom());
+            return $this->file($rFichier, $fichier->getvraiNom());
         }
     }
 

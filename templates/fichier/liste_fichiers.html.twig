@@ -32,10 +32,26 @@
 					{% for fichier in fichiers %}
 						<tr class="{{ cycle(['table-primary', 'table-secondary'],loop.index0)}}">
                         <td><a href="{{path('telechargement_fichier',{'id':fichier.id})}}">{{fichier.vraiNom}}</a> </td>
-                        <td> {{fichier.taille}} </td>
+						{% set tfichier = fichier.taille %}
+						{% set mesure = "O" %}
+						{% if tfichier > 1000 %}
+						{% set tfichier = tfichier/1000 %}
+						{% set mesure = "Ko" %}
+						{% if tfichier > 1000 %}
+						{% set tfichier = tfichier/1000 %}
+						{% set mesure = "Mo" %}
+						{% if tfichier > 1000 %}
+						{% set tfichier = tfichier/1000 %}
+						{% set mesure = "Go" %}
+						{% endif %}
+						{% endif %}
+						{% endif %}
+
+                        <td> {{tfichier}} {{mesure}} </td>
                         <td> {{fichier.extension}} </td>
-                        <td> {{fichier.utilisateur.prenom}} </td>
-                        <td> {{fichier.utilisateur.nom}} </td>
+                        <td> {{fichier.utilisateur.prenom}}
+                         {{fichier.utilisateur.nom}} </td>
+						 <td><a href="{{path('liste_fichiers',{'supp':fichier.id})}}" class="text-white"><span class="material-icons" title="Supprimer le fichier">delete</span></a></td>
 
 						</tr>
 					{% endfor %}
