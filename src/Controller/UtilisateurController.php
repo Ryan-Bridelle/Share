@@ -9,6 +9,7 @@ use App\Form\AjoutUtilisateurType;
 use App\Repository\UtilisateurRepository;
 use Symfony\Component\HttpFoundation\Request;
 use App\Form\ModifUtilisateurType;
+use App\Form\ImageProfilType;
 
 
 
@@ -107,4 +108,29 @@ class UtilisateurController extends AbstractController
            
         ]);
     }
+
+    /**
+     * @Route("/profil_utilisateur/{id}", name="profil_utilisateur", requirements={"id"="\d+"})
+     */
+    public function profilUtilisateur(int $id, Request $request)
+    {
+        $em = $this->getDoctrine();
+        $repoUtilisateur = $em->getRepository(Utilisateur::class);
+        $utilisateur = $repoUtilisateur->find($id);
+
+        $form = $this->createForm(ImageProfilType::class);
+
+        $path = $this->getParameter('profile_directory').'/defaut.png';
+        $data = file_get_contents($path);
+        $base64 = 'data:image/png;base64,'.base64_encode($data);
+        
+        
+        return $this->render('utilisateur/profil_utilisateur.html.twig', [
+            'utilisateur'=> $utilisateur,
+            'form'=>$form->createView(),
+            'base64'=>$base64
+
+        ]);
+
+        }
 }

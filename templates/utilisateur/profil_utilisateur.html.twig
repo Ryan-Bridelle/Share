@@ -1,0 +1,29 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}
+	{{parent()}}
+	profil Utilisateur
+{% endblock %}
+
+{% block body %}
+	{{parent()}}
+	<div class="container">
+		<div class="row justify-content-center">
+			<h1 class="text-center text-primary p-4">Profil de {{utilisateur.nom}} {{utilisateur.prenom}}</h1>
+		</div>
+
+		<div class="row justify-content-center">
+			<h2> Photo de profil : <img src="{{utilisateur.photo}}" alt="pdp"</h2>
+			<br>
+			<h2>Modifer la photo</h2>
+			{{ form_label()}}
+          </thead>
+          <tbody>
+
+
+				</tbody>
+			</table>
+
+
+		</div>
+	{% endblock %}
