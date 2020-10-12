@@ -5,7 +5,7 @@ namespace App\Controller;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\Routing\Annotation\Route;
 use App\Entity\Utilisateur;
-use App\Form\AjouterUtilisateurType;
+use App\Form\AjoutUtilisateurType;
 use App\Repository\UtilisateurRepository;
 use Symfony\Component\HttpFoundation\Request;
 use App\Form\ModifUtilisateurType;
@@ -64,7 +64,7 @@ class UtilisateurController extends AbstractController
      */
     public function ajoutUtilisateur(Request $request)
     {$utilisateur=new Utilisateur();
-        $form = $this->createForm(AjouterUtilisateurType::class, $utilisateur);
+        $form = $this->createForm(AjoutUtilisateurType::class, $utilisateur);
 
         if ($request->isMethod('POST')) {
             $form->handleRequest($request);
