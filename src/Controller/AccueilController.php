@@ -7,7 +7,7 @@ use Symfony\Component\Routing\Annotation\Route;
 use App\Form\ContactType;
 use Symfony\Component\HttpFoundation\Request;
 
-class StaticController extends AbstractController
+class AccueilController extends AbstractController
 {
     /**
      * @Route("/accueil", name="accueil")
@@ -15,7 +15,7 @@ class StaticController extends AbstractController
     public function index()
     {
         return $this->render('static/index.html.twig', [
-            'controller_name' => 'StaticController',
+            'controller_name' => 'AccueilController',
         ]);
     }
 

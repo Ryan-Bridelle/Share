@@ -1,29 +1,35 @@
-{% extends 'base.html.twig' %}
+% extends 'base.html.twig' %}
 
-{% block title %}
-	{{parent()}}
-	profil Utilisateur
-{% endblock %}
+{% block title %}{{parent()}}Profil utilisateur{% endblock %}
 
 {% block body %}
-	{{parent()}}
-	<div class="container">
-		<div class="row justify-content-center">
-			<h1 class="text-center text-primary p-4">Profil de {{utilisateur.nom}} {{utilisateur.prenom}}</h1>
-		</div>
-
-		<div class="row justify-content-center">
-			<h2> Photo de profil : <img src="{{utilisateur.photo}}" alt="pdp"</h2>
-			<br>
-			<h2>Modifer la photo</h2>
-			{{ form_label()}}
-          </thead>
-          <tbody>
-
-
-				</tbody>
-			</table>
-
-
-		</div>
-	{% endblock %}
+{{parent()}}
+<div class="container-fluid">   
+        <div class="row justify-content-center">
+            <h1 class="text-center text-primary p-4">Profil utilisateur</h1>
+        </div>
+        <div class="row justify-content-center">
+            <div class="col-8 bg-white p-4 m-0 text-primary">
+             <div class="card mb-3">
+              <div class="row no-gutters">
+               <div class="col-md-4">
+                
+                <img src="{{base64}}" class="card-img" alt="...">
+               <span class="material-icons text-white">
+                  cancel
+               </span>
+               </div>
+               <div class="col-md-8">
+                 <div class="card-body text-white">
+                   <h5 class="card-title">{{utilisateur.prenom | capitalize }} {{utilisateur.nom | upper}}</h5>
+                   <p class="card-text">Date de naissance {{ utilisateur.datenaissance | date("d-m-Y")}}</p>
+                   <p class="card-text">Date d'inscription {{ utilisateur.dateinscription | date("d-m-Y")}}</p>
+                   {{form(form)}}
+                 </div>
+              </div>
+           </div>
+        </div>
+      </div>
+   </div>
+</div>
+{% endblock %}    
